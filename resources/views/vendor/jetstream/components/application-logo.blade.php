@@ -1,0 +1,1 @@
+<img src="{{asset('images/pizza.png')}}" width="50px" alt="">
