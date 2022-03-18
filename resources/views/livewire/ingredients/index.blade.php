@@ -44,9 +44,9 @@
                         <td class="border px-4 py-2">{{ $ingredient->state == 1 ? 'Activo':'Inactivo'}}</td>
                         <td class="border px-4 py-2">
                             <button wire:click="edit({{ $ingredient->id }})"
-                                class="flex px-4 py-2 rounded-md bg-yellow-500 text-gray-900 cursor-pointer">Edit</button>
+                                class="flex px-4 py-2 rounded-md bg-yellow-500 text-gray-900 cursor-pointer">Editar</button>
                             <button wire:click="delete({{ $ingredient->id }})"
-                                class="flex px-4 py-2 rounded-md bg-red-500 text-white-600 cursor-pointer">Delete</button>
+                                class="flex px-4 py-2 rounded-md bg-red-500 text-white-600 cursor-pointer">Eliminar</button>
                         </td>
                     </tr>
                     @endforeach

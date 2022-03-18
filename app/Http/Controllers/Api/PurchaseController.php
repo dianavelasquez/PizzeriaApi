@@ -28,18 +28,28 @@ class PurchaseController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::where('email',$request->email)->first();
+        $request->validate([
+            'email' =>'required',
+            'pizza_id' => 'required',
+            'amount' => 'required',
+        ]);
+
+        $user = User::updateOrCreate(['email' => $request->email], [
+            'name' => $request->name,
+            'user_type' => 2,
+            'state' => 1,
+        ]);
         if(!is_null($user))
         {
-            $purchase = Purchase::where('user_id',$user->id)->where('state',1)->first();
-            if(is_null($purchase)){
-                $purchase = Purchase::UpdateOrcreate([
+           // $purchase = Purchase::where('user_id',$user->id)->where('state',1)->first();
+            //if(is_null($purchase)){
+                $purchase = Purchase::create([
                     "user_id" => $user->id,
                     "total" => 0,
                     'state'=>1,
                     "order_num" => Purchase::count() + 1
                 ]);
-            }
+            //}
             if($request->type == 1){
                 $pizza = Pizza::find($request->pizza_id);
 

@@ -10,6 +10,7 @@ class Branch extends Component
     public $isModalOpen = 0;
     public $branches;
     public $name;
+    public $address;
     public $state;
     public $branch_id;
 
@@ -30,18 +31,21 @@ class Branch extends Component
 
     public function clearField(){
         $this->name = "";
+        $this->address = "";
         $this->state = "";
     }
 
     public function store(){
         $this->validate([
             'name' => 'required',
+            'address' => 'required',
             'state' => 'required',
             //'password' => 'required|confirmed',
         ]);
     
         Sucursal::updateOrCreate(['id' => $this->branch_id], [
             'name' => $this->name,
+            'address' => $this->address,
             'state' => $this->state,
         ]);
         session()->flash('message', $this->branch_id ? 'Sucursal actualizada con éxito.' : 'Sucursal creada con éxito.');
@@ -52,6 +56,7 @@ class Branch extends Component
     public function edit($id){
         $branch = Sucursal::find($id);
         $this->name = $branch->name;
+        $this->address = $branch->address;
         $this->state = $branch->state;
         $this->branch_id = $branch->id;
         $this->isModalOpen = 1;

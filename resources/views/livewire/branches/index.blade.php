@@ -28,6 +28,7 @@
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 w-20">No.</th>
                         <th class="px-4 py-2">Nombre</th>
+                        <th class="px-4 py-2">Dirección</th>
                         <th class="px-4 py-2">Estado</th>
                         <th class="px-4 py-2">Acción</th>
                     </tr>
@@ -37,12 +38,13 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $branch->id }}</td>
                         <td class="border px-4 py-2">{{ $branch->name }}</td>
+                        <td class="border px-4 py-2">{{ $branch->address }}</td>
                         <td class="border px-4 py-2">{{ $branch->state == 1 ? 'Activo':'Inactivo'}}</td>
                         <td class="border px-4 py-2">
                             <button wire:click="edit({{ $branch->id }})"
-                                class="flex px-4 py-2 rounded-md bg-yellow-500 text-gray-900 cursor-pointer">Edit</button>
+                                class="flex px-4 py-2 rounded-md bg-yellow-500 text-gray-900 cursor-pointer">Editar</button>
                             <button wire:click="delete({{ $branch->id }})"
-                                class="flex px-4 py-2 rounded-md bg-red-500 text-white-600 cursor-pointer">Delete</button>
+                                class="flex px-4 py-2 rounded-md bg-red-500 text-white-600 cursor-pointer">Eliminar</button>
                         </td>
                     </tr>
                     @endforeach
