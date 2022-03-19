@@ -20,10 +20,40 @@ class PurchaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $purchases = Purchase::where('state',1)->get();
-        return $purchases;
+        $user = User::where('email',$request->email)->first();
+        if(!is_null($user)){
+            $purchases = Purchase::where('state',0)->where('user_id',$user->id)->get();
+            return $purchases;
+        }else{
+            return "Cliente no encontrado";
+        }
+        
+    }
+
+    public function complete(Request $request){
+       $request->validate([
+            'email' =>'required',
+        ]); 
+       $user = User::updateOrCreate(['email' => $request->email], [
+            'name' => $request->name,
+        ]);
+
+       if(!is_null($user)){
+            $purchase = Purchase::where('user_id',$user->id)->where('state',1)->first();
+            if(!is_null($purchase)){
+                $purchase->state=0;
+                $purchase->save();
+                return $purchase;
+            }else{
+                return "No tiene pendientes";
+            }
+
+
+       }else{
+        return 'No existe';
+       }
     }
 
     public function store(Request $request)
@@ -41,15 +71,17 @@ class PurchaseController extends Controller
         ]);
         if(!is_null($user))
         {
-           // $purchase = Purchase::where('user_id',$user->id)->where('state',1)->first();
-            //if(is_null($purchase)){
+            $purchase = Purchase::where('user_id',$user->id)->where('state',1)->first();
+            if(is_null($purchase)){
                 $purchase = Purchase::create([
                     "user_id" => $user->id,
                     "total" => 0,
                     'state'=>1,
                     "order_num" => Purchase::count() + 1
                 ]);
-            //}
+            }/*else{
+                $purchase->total = $purchase->total+
+            }*/
             if($request->type == 1){
                 $pizza = Pizza::find($request->pizza_id);
 

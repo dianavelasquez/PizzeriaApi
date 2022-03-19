@@ -17,9 +17,9 @@
                 <br>
             </b>
 
-            <table class="table-fixed w-full">
+            <table class="table-fixed table-auto border-collapse w-full" border="1" rules="all">
                 <thead>
-                    <tr>
+                    <tr class="bg-gray-100">
                         <th>Nombre</th>
                         <th>Dirección</th>
                     </tr>
@@ -28,8 +28,8 @@
                     @foreach($branches as $branch)
                     @if($branch->state == 1)
                         <tr>
-                            <td>{{ $branch->name }}</td>
-                            <td>{{ $branch->address }}</td>
+                            <td class="text-center border px-4 py-2">{{ $branch->name }}</td>
+                            <td class="text-center border px-4 py-2">{{ $branch->address }}</td>
                         </tr>
                     @endif
                     @endforeach
@@ -59,8 +59,9 @@
             $users = \App\Models\User::all();
 
             $frecuentes=\DB::table('purchases as r')
-            ->select('u.email',\DB::raw('count(r.user_id) AS veces'))
+            ->select('u.email',\DB::raw('count(r.user_id) AS veces'),\DB::raw('sum(r.total) AS total'))
             ->join('users as u','u.id','r.user_id')
+            ->where('r.state',0)
             ->groupBy('r.user_id','u.email')
             ->orderBy('veces','DESC')
             ->get();
@@ -75,16 +76,18 @@
 
             <table class="table-fixed w-full">
                 <thead>
-                    <tr>
+                    <tr class="bg-gray-100">
                         <th>Correo electronico</th>
                         <th>Compras </th>
+                        <th>Total </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($frecuentes as $user)
                         <tr>
-                            <td class="text-center">{{ $user->email }}</td>
-                            <td class="text-center">{{ $user->veces }}</td>
+                            <td class="text-center border px-4 py-2">{{ $user->email }}</td>
+                            <td class="text-center border px-4 py-2">{{ $user->veces }}</td>
+                            <td class="text-center border px-4 py-2">${{ $user->total }}</td>
                         </tr>
                     @endforeach
                 </tbody>

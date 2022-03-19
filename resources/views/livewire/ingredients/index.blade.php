@@ -39,7 +39,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $ingredient->id }}</td>
                         <td class="border px-4 py-2">{{ $ingredient->name }}</td>
-                        <td class="border px-4 py-2">{{ $ingredient->price }}</td>
+                        <td class="border px-4 py-2">$ {{ $ingredient->price }}</td>
                         <td class="border px-4 py-2">{{ $ingredient->stock }}</td>
                         <td class="border px-4 py-2">{{ $ingredient->state == 1 ? 'Activo':'Inactivo'}}</td>
                         <td class="border px-4 py-2">

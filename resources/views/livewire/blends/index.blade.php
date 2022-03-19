@@ -41,7 +41,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $blend->id }}</td>
                         <td class="border px-4 py-2">{{ $blend->name }}</td>
-                        <td class="border px-4 py-2">{{ $blend->price }}</td>
+                        <td class="border px-4 py-2">$ {{ $blend->price }}</td>
                         <td class="border px-4 py-2">{{ $blend->getSize($blend->id) }}</td>
                         <td class="border px-4 py-2">
                             @foreach($blend->ingredients as $ingredient)
@@ -51,8 +51,6 @@
                         <td class="border px-4 py-2">{{ $blend->stock }}</td>
                         <td class="border px-4 py-2">{{ $blend->state == 1 ? 'Activo':'Inactivo'}}</td>
                         <td class="border px-4 py-2">
-                            <button wire:click="edit({{ $blend->id }})"
-                                class="flex px-4 py-2 rounded-md bg-yellow-500 text-gray-900 cursor-pointer">Editar</button>
                             <button wire:click="delete({{ $blend->id }})"
                                 class="flex px-4 py-2 rounded-md bg-red-500 text-white-600 cursor-pointer">Eliminar</button>
                         </td>

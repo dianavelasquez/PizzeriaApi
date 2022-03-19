@@ -18,10 +18,10 @@ use App\Http\Livewire\Pizzas;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
-Route::group(['prefix'=>'panel'], function(){
+Route::group(['prefix'=>'panel','middleware'=>'auth:sanctum'], function(){
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

@@ -40,7 +40,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $pizza->id }}</td>
                         <td class="border px-4 py-2">{{ $pizza->name }}</td>
-                        <td class="border px-4 py-2">{{ $pizza->price }}</td>
+                        <td class="border px-4 py-2">$ {{ $pizza->price }}</td>
                         <td class="border px-4 py-2">{{ $pizza->getSize($pizza->id) }}</td>
                         <td class="border px-4 py-2">{{ $pizza->ingredient->name }}</td>
                         <td class="border px-4 py-2">{{ $pizza->state == 1 ? 'Activo':'Inactivo'}}</td>

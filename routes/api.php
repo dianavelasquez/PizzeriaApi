@@ -29,3 +29,4 @@ Route::get('blends',[BlendController::class, 'index']);
 Route::get('ingredients', [IngredientController::class, 'index']);
 Route::get('purchases', [PurchaseController::class, 'index']);
 Route::get('purchases-store', [PurchaseController::class, 'store']);
+Route::get('purchases-complete', [PurchaseController::class, 'complete']);

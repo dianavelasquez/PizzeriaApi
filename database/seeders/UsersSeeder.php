@@ -18,6 +18,7 @@ class UsersSeeder extends Seeder
         $user->name = 'Administrator';
         $user->email = 'dianalouvp@gmail.com';
         $user->password = bcrypt('password');
+        $user->user_type = 0;
         $user->save();
     }
 }
